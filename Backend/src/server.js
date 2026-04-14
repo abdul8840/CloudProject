@@ -10,6 +10,7 @@ import connectDB from './config/database.js';
 import logger from './utils/logger.js';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
 import authRoutes from './routes/authRoutes.js';
+import productRoutes from './routes/productRoutes.js';
 
 // Initialize express app
 const app = express();
@@ -56,6 +57,7 @@ app.get('/health', (req, res) => {
 
 // API routes
 app.use(`/api/${config.apiVersion}/auth`, authRoutes);
+app.use(`/api/${config.apiVersion}/products`, productRoutes);
 
 // 404 handler
 app.use(notFound);

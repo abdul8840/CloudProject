@@ -8,6 +8,7 @@ import rateLimit from 'express-rate-limit';
 import config from './config/env.js';
 import connectDB from './config/database.js';
 import logger from './utils/logger.js';
+import { errorHandler, notFound } from './middleware/errorHandler.js';
 
 // Initialize express app
 const app = express();
@@ -51,6 +52,12 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+// 404 handler
+app.use(notFound);
+
+// Error handler
+app.use(errorHandler);
 
 // Start server
 const PORT = config.port;

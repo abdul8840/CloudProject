@@ -9,6 +9,7 @@ import config from './config/env.js';
 import connectDB from './config/database.js';
 import logger from './utils/logger.js';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
+import authRoutes from './routes/authRoutes.js';
 
 // Initialize express app
 const app = express();
@@ -52,6 +53,9 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+// API routes
+app.use(`/api/${config.apiVersion}/auth`, authRoutes);
 
 // 404 handler
 app.use(notFound);

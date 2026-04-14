@@ -6,10 +6,14 @@ import mongoSanitize from 'express-mongo-sanitize';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import config from './config/env.js';
+import connectDB from './config/database.js';
 import logger from './utils/logger.js';
 
 // Initialize express app
 const app = express();
+
+// Connect to database
+connectDB();
 
 // Security middleware
 app.use(helmet());

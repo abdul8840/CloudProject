@@ -47,10 +47,13 @@ export const errorHandler = (err, req, res, next) => {
   let error = { ...err };
   error.message = err.message;
   
-  // Log error
-  logger.error(`Error: ${err.message}`);
-  if (config.env === 'development') {
-    logger.error(err.stack);
+  // Log error (skip known noisy routes in development)
+  const isNoisyRoute = req.originalUrl.includes('/api/orders');
+  if (!isNoisyRoute || config.env === 'production') {
+    logger.error(`Error: ${err.message}`);
+    if (config.env === 'development') {
+      logger.error(err.stack);
+    }
   }
   
   // Mongoose duplicate key
@@ -72,7 +75,7 @@ export const errorHandler = (err, req, res, next) => {
   res.status(error.statusCode || 500).json({
     success: false,
     message: error.message || 'Server Error',
-    ...(config.env === 'development' && { stack: err.stack }),
+    ...(config.env === 'development' && !isNoisyRoute && { stack: err.stack }),
   });
 };
 
@@ -80,6 +83,18 @@ export const errorHandler = (err, req, res, next) => {
  * Handle 404 not found
  */
 export const notFound = (req, res, next) => {
+  // Silently ignore known polling routes in development
+  const ignoredRoutes = ['/api/orders'];
+  const shouldIgnore = config.env === 'development' && 
+    ignoredRoutes.some(route => req.originalUrl.includes(route));
+  
+  if (shouldIgnore) {
+    return res.status(404).json({
+      success: false,
+      message: 'Route not found',
+    });
+  }
+  
   const error = new AppError(`Route ${req.originalUrl} not found`, 404);
   next(error);
 };

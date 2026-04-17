@@ -9,9 +9,9 @@ import config from './config/env.js';
 import connectDB from './config/database.js';
 import logger from './utils/logger.js';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
-
-// Import routes - CONSOLIDATED
-import apiRoutes from './routes/index.js';  // ← NEW
+import { blockUnwantedRoutes } from './middleware/blockRoutes.js'; // ← ADD THIS
+import authRoutes from './routes/authRoutes.js';
+import productRoutes from './routes/productRoutes.js';
 
 // Initialize express app
 const app = express();
@@ -46,6 +46,9 @@ if (config.env === 'development') {
   app.use(morgan('dev'));
 }
 
+// Block unwanted routes BEFORE they hit the logger
+app.use(blockUnwantedRoutes); // ← ADD THIS
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({
@@ -56,8 +59,9 @@ app.get('/health', (req, res) => {
   });
 });
 
-// API routes - SIMPLIFIED
-app.use(`/api/${config.apiVersion}`, apiRoutes);
+// API routes
+app.use(`/api/${config.apiVersion}/auth`, authRoutes);
+app.use(`/api/${config.apiVersion}/products`, productRoutes);
 
 // 404 handler
 app.use(notFound);

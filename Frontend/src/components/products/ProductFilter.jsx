@@ -1,4 +1,5 @@
-import { useState } from 'react';
+// ProductFilter.jsx
+import React, { useState } from 'react';
 import { PRODUCT_CATEGORIES, SORT_OPTIONS } from '../../utils/constants.js';
 import Input from '../common/Input.jsx';
 import Button from '../common/Button.jsx';
@@ -27,8 +28,8 @@ const ProductFilter = ({ filters, onFilterChange, onReset }) => {
   };
 
   return (
-    <div className="card mb-6">
-      <h2 className="text-lg font-semibold mb-4">Filter Products</h2>
+    <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 mb-6">
+      <h2 className="text-lg font-semibold text-gray-900 mb-4">Filter Products</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Search */}
@@ -41,9 +42,9 @@ const ProductFilter = ({ filters, onFilterChange, onReset }) => {
 
         {/* Category */}
         <div>
-          <label className="label">Category</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
           <select
-            className="input"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
             value={localFilters.category || ''}
             onChange={(e) => handleChange('category', e.target.value)}
           >
@@ -78,9 +79,9 @@ const ProductFilter = ({ filters, onFilterChange, onReset }) => {
 
       {/* Sort */}
       <div className="mt-4">
-        <label className="label">Sort By</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Sort By</label>
         <select
-          className="input max-w-xs"
+          className="w-full sm:w-64 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
           value={localFilters.sort || '-createdAt'}
           onChange={(e) => handleChange('sort', e.target.value)}
         >
@@ -93,7 +94,7 @@ const ProductFilter = ({ filters, onFilterChange, onReset }) => {
       </div>
 
       {/* Buttons */}
-      <div className="flex gap-3 mt-6">
+      <div className="flex flex-wrap gap-3 mt-6">
         <Button onClick={handleApply}>Apply Filters</Button>
         <Button variant="secondary" onClick={handleReset}>
           Reset

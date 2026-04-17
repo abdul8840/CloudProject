@@ -1,3 +1,5 @@
+// ProductList.jsx
+import React from 'react';
 import ProductCard from './ProductCard.jsx';
 import LoadingSpinner from '../common/LoadingSpinner.jsx';
 
@@ -12,7 +14,7 @@ const ProductList = ({ products, loading }) => {
 
   if (!products || products.length === 0) {
     return (
-      <div className="text-center py-12">
+      <div className="text-center py-12 bg-white rounded-lg border border-gray-200 shadow-sm">
         <svg
           className="mx-auto h-12 w-12 text-gray-400"
           fill="none"

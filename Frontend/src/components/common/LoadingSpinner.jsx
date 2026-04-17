@@ -1,3 +1,6 @@
+// LoadingSpinner.jsx
+import React from 'react';
+
 const LoadingSpinner = ({ size = 'md', fullScreen = false }) => {
   const sizeClasses = {
     sm: 'h-4 w-4 border-2',
@@ -8,13 +11,13 @@ const LoadingSpinner = ({ size = 'md', fullScreen = false }) => {
 
   const spinner = (
     <div
-      className={`${sizeClasses[size]} border-primary-600 border-t-transparent rounded-full animate-spin`}
+      className={`${sizeClasses[size]} border-gray-800 border-t-transparent rounded-full animate-spin`}
     />
   );
 
   if (fullScreen) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+      <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50">
         <div className="bg-white p-8 rounded-lg shadow-xl">
           {spinner}
         </div>

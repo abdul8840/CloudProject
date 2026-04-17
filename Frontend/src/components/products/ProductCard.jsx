@@ -1,10 +1,12 @@
+// ProductCard.jsx
+import React from 'react';
 import { formatPrice } from '../../utils/helpers.js';
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="card hover:shadow-xl transition-shadow duration-300 fade-in">
+    <div className="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden fade-in">
       {/* Product Image */}
-      <div className="relative mb-4 overflow-hidden rounded-lg bg-gray-100">
+      <div className="relative overflow-hidden bg-gray-100">
         <img
           src={product.imageUrl}
           alt={product.name}
@@ -12,14 +14,14 @@ const ProductCard = ({ product }) => {
           loading="lazy"
         />
         <div className="absolute top-2 right-2">
-          <span className="bg-primary-600 text-white text-xs px-2 py-1 rounded-full">
+          <span className="bg-gray-800 text-white text-xs px-2 py-1 rounded-full">
             {product.category}
           </span>
         </div>
       </div>
 
       {/* Product Info */}
-      <div className="space-y-2">
+      <div className="p-4 space-y-2">
         <h3 className="font-semibold text-lg text-gray-900 line-clamp-1">
           {product.name}
         </h3>
@@ -28,7 +30,7 @@ const ProductCard = ({ product }) => {
           {product.description}
         </p>
 
-        {/* Rating */}
+        {/* Rating - Black & White Stars */}
         <div className="flex items-center gap-2">
           <div className="flex items-center">
             {[...Array(5)].map((_, i) => (
@@ -36,7 +38,7 @@ const ProductCard = ({ product }) => {
                 key={i}
                 className={`w-4 h-4 ${
                   i < Math.floor(product.rating)
-                    ? 'text-yellow-400'
+                    ? 'text-black'
                     : 'text-gray-300'
                 }`}
                 fill="currentColor"
@@ -52,13 +54,13 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Price and Stock */}
-        <div className="flex items-center justify-between pt-2 border-t">
-          <span className="text-2xl font-bold text-primary-600">
+        <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+          <span className="text-2xl font-bold text-black">
             {formatPrice(product.price)}
           </span>
           <span
             className={`text-sm font-medium ${
-              product.stock > 0 ? 'text-green-600' : 'text-red-600'
+              product.stock > 0 ? 'text-green-700' : 'text-red-600'
             }`}
           >
             {product.stock > 0 ? `In Stock (${product.stock})` : 'Out of Stock'}

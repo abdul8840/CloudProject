@@ -1,3 +1,4 @@
+// CORRECT VERSION
 import { API_BASE_URL } from '../utils/constants.js';
 
 /**
@@ -18,23 +19,19 @@ export const apiClient = async (endpoint, options = {}) => {
     ...options,
   };
 
-  try {
-    const response = await fetch(url, config);
-    const data = await response.json();
+  const response = await fetch(url, config);
+  const data = await response.json();
 
-    if (!response.ok) {
-      throw {
-        response: {
-          status: response.status,
-          data,
-        },
-      };
-    }
-
-    return data;
-  } catch (error) {
-    throw error;
+  if (!response.ok) {
+    throw {
+      response: {
+        status: response.status,
+        data,
+      },
+    };
   }
+
+  return data;
 };
 
 /**

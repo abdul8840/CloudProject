@@ -1,3 +1,5 @@
+// Dashboard.jsx
+import React from 'react';
 import { useProducts } from '../hooks/useProducts.js';
 import { useAuth } from '../hooks/useAuth.js';
 import ProductList from '../components/products/ProductList.jsx';
@@ -25,7 +27,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="container-custom py-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -61,7 +63,7 @@ const Dashboard = () => {
 
         {/* Pagination */}
         {pagination && pagination.totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 mt-8">
+          <div className="flex flex-wrap justify-center items-center gap-2 mt-8">
             <Button
               variant="secondary"
               disabled={pagination.currentPage === 1}
@@ -70,7 +72,7 @@ const Dashboard = () => {
               Previous
             </Button>
 
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {[...Array(pagination.totalPages)].map((_, index) => {
                 const page = index + 1;
                 // Show only nearby pages
@@ -95,7 +97,7 @@ const Dashboard = () => {
                   page === pagination.currentPage - 2 ||
                   page === pagination.currentPage + 2
                 ) {
-                  return <span key={page} className="px-2">...</span>;
+                  return <span key={page} className="px-2 text-gray-500">...</span>;
                 }
                 return null;
               })}

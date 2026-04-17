@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+// Login.jsx
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.js';
 import { ROUTES } from '../utils/constants.js';
@@ -62,12 +63,12 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-primary-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
-        <div className="card">
+        <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 sm:p-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-400 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-white font-bold text-2xl">M</span>
             </div>
             <h2 className="text-3xl font-bold text-gray-900">Welcome Back</h2>
@@ -76,10 +77,10 @@ const Login = () => {
             </p>
           </div>
 
-          {/* Demo Credentials */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-            <p className="text-sm text-blue-800 font-medium mb-2">Demo Credentials:</p>
-            <p className="text-xs text-blue-700">
+          {/* Demo Credentials - black & white style */}
+          <div className="bg-gray-100 border border-gray-200 rounded-lg p-4 mb-6">
+            <p className="text-sm text-gray-800 font-medium mb-2">Demo Credentials:</p>
+            <p className="text-xs text-gray-700">
               <strong>Email:</strong> demo@example.com<br />
               <strong>Password:</strong> demo123
             </p>
@@ -124,7 +125,7 @@ const Login = () => {
               Don't have an account?{' '}
               <Link
                 to={ROUTES.REGISTER}
-                className="font-medium text-primary-600 hover:text-primary-500 transition-colors"
+                className="font-medium text-black hover:text-gray-700 transition-colors"
               >
                 Sign up now
               </Link>
